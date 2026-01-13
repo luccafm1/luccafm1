@@ -1,1 +1,3 @@
-![Follower Quote](follower_quote.png)
+<p align="center">
+  <img src="follower_quote.png" alt="Follower Quote" width="800">
+</p>
