@@ -10,7 +10,6 @@ FONT_SIZE = 40
 TEXT_COLOR = "white"
 STROKE_COLOR = "black"
 STROKE_WIDTH = 3
-TEXT_Y_OFFSET = 20
 
 def get_follower_count(username):
     url = f"https://api.github.com/users/{username}"
@@ -42,7 +41,7 @@ def create_image(count):
 
     image_width, image_height = image.size
     x = (image_width - text_width) / 2
-    y = TEXT_Y_OFFSET
+    y = (image_height - text_height) / 2
 
     draw.multiline_text((x, y), text, font=font, fill=TEXT_COLOR, align="center", stroke_width=STROKE_WIDTH, stroke_fill=STROKE_COLOR)
 
