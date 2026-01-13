@@ -22,7 +22,7 @@ def get_follower_count(username):
         return None
 
 def create_image(count):
-    text = f"\"You don't get to {count} followers on Github\nwithout making some enemies\""
+    text = f"You don't get to {count} followers on Github\nwithout making some enemies"
     try:
         image = Image.open(SOURCE_IMAGE_PATH)
     except FileNotFoundError:
