@@ -9,7 +9,7 @@ jobs:
   update-image:
     runs-on: ubuntu-latest
     permissions:
-      contents:
+      contents: write
     
     steps:
       - name: Checkout Repository
