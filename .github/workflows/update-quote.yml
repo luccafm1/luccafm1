@@ -2,15 +2,16 @@ name: Update Follower Quote Image
 
 on:
   schedule:
-    - cron: '0 * * * *' #<-- runs every hour
+    - cron: '0 * * * *' 
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   update-image:
     runs-on: ubuntu-latest
-    permissions:
-      contents:
-    
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -19,7 +20,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.x'
-          cache: 'pip' 
+          cache: 'pip'
 
       - name: Install Dependencies
         run: |
@@ -31,13 +32,15 @@ jobs:
 
       - name: Commit and Push Changes
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          # Only commit if the file has actually changed
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
           git add follower_quote.png
+
           if git diff --staged --quiet; then
             echo "No changes to commit."
-          else
-            git commit -m "Update follower quote image [skip ci]"
-            git push
+            exit 0
           fi
+
+          git commit -m "Update follower quote image [skip ci]"
+          git push
