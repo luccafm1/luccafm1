@@ -9,7 +9,7 @@ FONT_PATH = "font.ttf"
 FONT_SIZE = 55
 TEXT_COLOR = "white"
 STROKE_COLOR = "black"
-STROKE_WIDTH = 3
+STROKE_WIDTH = 5
 
 def get_follower_count(username):
     url = f"https://api.github.com/users/{username}"
