@@ -1,0 +1,43 @@
+name: Update Follower Quote Image
+
+on:
+  schedule:
+    - cron: '0 * * * *' #<-- runs every hour
+  workflow_dispatch:
+
+jobs:
+  update-image:
+    runs-on: ubuntu-latest
+    permissions:
+      contents:
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+          cache: 'pip' 
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests Pillow
+
+      - name: Run Image Generation Script
+        run: python generate_image.py
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Only commit if the file has actually changed
+          git add follower_quote.png
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Update follower quote image [skip ci]"
+            git push
+          fi
